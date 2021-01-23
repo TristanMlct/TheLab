@@ -1,0 +1,17 @@
+.projet {
+    margin: 50px auto;
+    padding-bottom: 16px;
+    border: 3px black solid;
+    border-radius: 10px;
+    text-align: center;
+    width: 80%;
+    color: black;
+}
+
+a {
+    color: #737373;
+}
+
+a:visited {
+    color: #737373;
+}

@@ -1,0 +1,18 @@
+extends baseTemplate.pug
+
+append headTag 
+    link(rel="stylesheet", href="/css/correcteurOrthographe.css")
+    link(rel="preconnect", href="https://fonts.gstatic.com")
+    link(href="https://fonts.googleapis.com/css2?family=Tangerine:wght@700&family=Varela+Round&display=swap",rel="stylesheet")
+
+
+block content
+    h1#test The Lab
+
+    script. 
+        let listeDeMots = "#{listeDeMots}";
+        console.log(listeDeMots);
+        let j = 0;
+        for(let i = 0; i < listeDeMots.length; i++) {
+            if(listeDeMots[i] === "\n") console.log(j++);
+        }

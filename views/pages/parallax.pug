@@ -1,0 +1,50 @@
+html
+  head
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet", href="/css/parallax.css")
+    link(rel="preconnect", href="https://fonts.gstatic.com")
+    link(href="https://fonts.googleapis.com/css2?family=Catamaran:wght@900&family=Kanit:wght@800&display=swap",rel="stylesheet")
+    link(href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap",rel="stylesheet")
+  body
+    #scene
+        .parallax#wordWelcomeTo WELCOME <br> TO
+        .parallax#wordTheLab THE LAB
+
+    script.
+        let last_known_scroll_position = 0;
+        let next_known_scroll_position = 0;
+        let ticking = false;
+        let slowParallaxItem = document.querySelectorAll('.parallax.yellow')
+        let baseTopPositionSlowParallax = window.getComputedStyle(document.getElementById('wordWelcomeTo')).top
+        let baseTopPositionFastParallax = window.getComputedStyle(document.getElementById('wordTheLab')).top
+
+        function parallaxEffect(last_known_scroll_position, next_known_scroll_position) {
+            if(next_known_scroll_position <= 400) {
+                document.getElementById('wordTheLab').classList.remove('fixed')
+                
+                let slowParallaxTopChange = next_known_scroll_position * 0.3
+                document.getElementById('wordWelcomeTo').style.top = parseInt(baseTopPositionSlowParallax) + slowParallaxTopChange
+                    
+                let fastParallaxTopChange = next_known_scroll_position * 0.4
+                document.getElementById('wordTheLab').style.top = parseInt(baseTopPositionFastParallax) + fastParallaxTopChange        
+            } else {
+                document.getElementById('wordTheLab').classList.add('fixed')
+            }
+        }
+
+        document.addEventListener('scroll', function(e) {
+            last_known_scroll_position = next_known_scroll_position;
+            next_known_scroll_position = window.scrollY;
+
+            if (!ticking) {
+                window.requestAnimationFrame(function() {
+                    parallaxEffect(last_known_scroll_position, next_known_scroll_position);
+                    ticking = false;
+                });
+
+                ticking = true;
+            }
+        });
+        console.log(window.getComputedStyle(document.querySelectorAll('.parallax')[0]).top)
+    
